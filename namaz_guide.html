@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>নামাজের সম্পূর্ণ গাইড</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Noto+Serif+Bengali:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --green-deep:#1a4731;--green-mid:#2d6a4f;--green-light:#52b788;--green-pale:#d8f3dc;
+    --gold:#c8973a;--gold-light:#f4d58d;--cream:#fdf8f0;
+    --text-dark:#1a1a1a;--text-mid:#3d3d3d;--text-muted:#6b6b6b;
+    --border-light:rgba(200,151,58,0.2);--border-mid:rgba(200,151,58,0.4);
+    --bg-primary:#fff;--bg-secondary:#f5f5f0;
+  }
+  body{background:var(--cream);font-family:'Lora',serif;color:var(--text-dark);min-height:100vh;padding:16px 8px 40px}
+  .wrap{max-width:680px;margin:0 auto}
+  .header{text-align:center;padding:32px 20px 24px;background:linear-gradient(135deg,var(--green-deep) 0%,var(--green-mid) 100%);border-radius:20px;margin-bottom:20px;position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(26,71,49,0.25)}
+  .header::before{content:'';position:absolute;top:-30px;left:-30px;width:130px;height:130px;border:2px solid rgba(200,151,58,0.25);border-radius:50%}
+  .header::after{content:'';position:absolute;bottom:-40px;right:-20px;width:150px;height:150px;border:1.5px solid rgba(200,151,58,0.2);border-radius:50%}
+  .header-icon{font-size:34px;margin-bottom:10px}
+  .header h1{font-family:'Noto Serif Bengali',serif;color:#fff;font-size:24px;font-weight:600;letter-spacing:0.5px;margin-bottom:6px}
+  .header p{color:rgba(255,255,255,0.75);font-size:14px;font-style:italic}
+  .tabs{display:flex;gap:8px;margin-bottom:18px;background:#e8e4d9;border-radius:14px;padding:6px}
+  .tab{flex:1;padding:10px 4px;text-align:center;font-family:'Noto Serif Bengali',serif;font-size:14px;cursor:pointer;border-radius:10px;border:none;background:transparent;color:var(--text-muted);transition:all .2s;font-weight:600}
+  .tab.active{background:var(--green-mid);color:#fff}
+  .section{display:none}
+  .section.active{display:block}
+  .prayer-card{background:var(--bg-primary);border:1px solid var(--border-mid);border-radius:14px;margin-bottom:12px;overflow:hidden;box-shadow:0 1px 6px rgba(45,106,79,0.07)}
+  .card-head{padding:14px 18px;background:var(--green-deep);cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none}
+  .card-head h3{font-family:'Noto Serif Bengali',serif;font-size:15px;color:#fff;font-weight:600}
+  .card-head .arrow{color:var(--gold-light);font-size:18px;transition:transform .3s;display:inline-block}
+  .card-head.open .arrow{transform:rotate(180deg)}
+  .card-body{padding:18px;display:none;border-top:1px solid var(--border-light)}
+  .card-body.show{display:block}
+  .dua-label{font-family:'Noto Serif Bengali',serif;font-size:12px;font-weight:600;color:var(--green-mid);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px}
+  .dua-text{font-family:'Noto Serif Bengali',serif;font-size:15px;line-height:2;color:var(--text-dark);background:var(--green-pale);padding:14px 16px;border-radius:10px;border-left:4px solid var(--green-light);margin-bottom:12px}
+  .timing-note{font-size:13px;color:var(--text-muted);font-style:italic;margin-top:-4px;margin-bottom:12px;padding-left:4px}
+  .divider{height:1px;background:var(--border-light);margin:12px 0}
+  .rakat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px}
+  .rakat-card{background:var(--bg-primary);border:1px solid var(--border-mid);border-radius:14px;overflow:hidden;box-shadow:0 1px 6px rgba(45,106,79,0.07)}
+  .rakat-head{padding:12px 16px;background:var(--green-deep);display:flex;align-items:center;gap:10px}
+  .rakat-head .icon{font-size:18px}
+  .rakat-head h4{font-family:'Noto Serif Bengali',serif;font-size:15px;color:#fff;font-weight:600}
+  .rakat-body{padding:14px 16px}
+  .rakat-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:0.5px solid var(--border-light);font-size:13px}
+  .rakat-row:last-of-type{border-bottom:none}
+  .rakat-row .label{font-family:'Noto Serif Bengali',serif;color:var(--text-mid)}
+  .badge{font-family:'Noto Serif Bengali',serif;font-weight:600;font-size:12px;padding:3px 12px;border-radius:20px;color:#fff}
+  .badge-s{background:var(--green-mid)}
+  .badge-f{background:var(--green-deep)}
+  .badge-w{background:var(--gold)}
+  .legend{display:flex;gap:14px;margin-bottom:16px;flex-wrap:wrap}
+  .legend-item{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--text-muted);font-family:'Noto Serif Bengali',serif}
+  .legend-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0}
+  .total-tag{display:inline-block;font-family:'Noto Serif Bengali',serif;font-size:12px;font-weight:600;color:var(--green-mid);background:var(--green-pale);padding:3px 10px;border-radius:20px;margin-top:8px}
+  .gold-bar{height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:4px 0 18px;border-radius:2px}
+  .note-box{background:var(--green-pale);border-radius:12px;padding:16px 18px;border-left:4px solid var(--green-light)}
+  .note-box p{font-family:'Noto Serif Bengali',serif;font-size:13.5px;color:var(--green-deep);line-height:1.9}
+  .footer{text-align:center;margin-top:30px;color:var(--text-muted);font-size:12px;font-family:'Noto Serif Bengali',serif}
+  @media(max-width:480px){.rakat-grid{grid-template-columns:1fr}.header h1{font-size:20px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header">
+    <div class="header-icon">🕌</div>
+    <h1>নামাজের সম্পূর্ণ গাইড</h1>
+    <p>দোয়া • তাসবিহ • রাকাতের বিবরণ</p>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('duas')">নামাজের দোয়া</button>
+    <button class="tab" onclick="switchTab('rakats')">রাকাত সংখ্যা</button>
+  </div>
+
+  <!-- DUA SECTION -->
+  <div class="section active" id="duas">
+
+    <div class="prayer-card">
+      <div class="card-head open" onclick="toggle(this)">
+        <h3>জায়নামাজে দাঁড়ানোর দোয়া</h3>
+        <span class="arrow">▾</span>
+      </div>
+      <div class="card-body show">
+        <div class="dua-text">ইন্নী ওয়াজ্জাহতু ওয়াজহিয়া লিল্লাযী ফাতারাছ সামাওয়াতি ওয়াল আরদা হানীফাও ওয়ামা আনা মিনাল মুশরিকীন।</div>
+        <p class="timing-note">নামাজ শুরু করার আগে নিয়্যত করার সময় পড়তে হয়।</p>
+      </div>
+    </div>
+
+    <div class="prayer-card">
+      <div class="card-head open" onclick="toggle(this)">
+        <h3>সানা (ছানা)</h3>
+        <span class="arrow">▾</span>
+      </div>
+      <div class="card-body show">
+        <div class="dua-text">সুবহা-নাকাল্লা-হুম্মা ওয়া বিহামদিকা ওয়া তাবা-রোকাসমুকা ওয়া তা'আ-লা জাদ্দুকা ওয়া লা-ইলা-হা গাইরুক।</div>
+        <p class="timing-note">তাকবীরে তাহরীমার পর, সূরা ফাতিহা পড়ার আগে পড়তে হয়।</p>
+      </div>
+    </div>
+
+    <div class="prayer-card">
+      <div class="card-head" onclick="toggle(this)">
+        <h3>রুকু — তাসবিহ ও দোয়া</h3>
+        <span class="arrow">▾</span>
+      </div>
+      <div class="card-body">
+        <div class="dua-label">রুকুতে যাওয়ার সময়</div>
+        <div class="dua-text">আল্লাহু আকবার</div>
+        <div class="dua-label">রুকুর তাসবিহ (কমপক্ষে ৩ বার)</div>
+        <div class="dua-text">সুবহা-না রাব্বিয়াল আ'যীম।</div>
+        <div class="divider"></div>
+        <div class="dua-label">রুকু থেকে উঠার সময়</div>
+        <div class="dua-text">সামিআল্লাহু লিমান হামিদাহ।</div>
+        <div class="dua-label">সোজা হয়ে দাঁড়িয়ে</div>
+        <div class="dua-text">রাব্বানা- লাকাল হামদ।</div>
+      </div>
+    </div>
+
+    <div class="prayer-card">
+      <div class="card-head" onclick="toggle(this)">
+        <h3>আত্তাহিয়াতু (তাশাহহুদ)</h3>
+        <span class="arrow">▾</span>
+      </div>
+      <div class="card-body">
+        <div class="dua-text">আত্তাহিইয়া-তু লিল্লা-হি ওয়াস সালাওয়া-তু ওয়াত তায়্যিবা-তু, আসসালা-মু 'আলাইকা আইয়্যুহান নাবিইয়ু ওয়া রহমাতুল্লা-হি ওয়া বারাকাতুহু, আসসালা-মু 'আলাইনা- ওয়া 'আলা- 'ইবাদিল্লা-হিস সালিহীন। আশহাদু আল্লা- ইলা-হা ইল্লাল্লা-হু ওয়া আশহাদু আন্না মুহাম্মাদান 'আবদুহু ওয়া রাসূলুহু।</div>
+        <p class="timing-note">প্রতিটি দুই রাকাতের পর বসে পড়তে হয়।</p>
+      </div>
+    </div>
+
+    <div class="prayer-card">
+      <div class="card-head" onclick="toggle(this)">
+        <h3>দরুদ শরীফ (ইব্রাহীম)</h3>
+        <span class="arrow">▾</span>
+      </div>
+      <div class="card-body">
+        <div class="dua-text">আল্লা-হুম্মা সাল্লি 'আলা- মুহাম্মাদিওঁ ওয়া 'আলা- আ-লি মুহাম্মাদিন কামা- সাল্লাইতা 'আলা- ইব্রাহীমা ওয়া 'আলা- আ-লি ইব্রাহীমা ইন্নাকা হামীদুম মাজীদ। আল্লা-হুম্মা বা-রিক 'আলা- মুহাম্মাদিওঁ ওয়া 'আলা- আ-লি মুহাম্মাদিন কামা- বা-রাকতা 'আলা- ইব্রাহীমা ওয়া 'আলা- আ-লি ইব্রাহীমা ইন্নাকা হামীদুম মাজীদ।</div>
+        <p class="timing-note">আত্তাহিয়াতুর পর শেষ বৈঠকে পড়তে হয়।</p>
+      </div>
+    </div>
+
+    <div class="prayer-card">
+      <div class="card-head" onclick="toggle(this)">
+        <h3>দোয়া মাসূরা (সালাম ফেরানোর আগে)</h3>
+        <span class="arrow">▾</span>
+      </div>
+      <div class="card-body">
+        <div class="dua-text">আল্লা-হুম্মা ইন্নী যালামতু নাফসী যুলমান কাছীরাওঁ ওয়ালা- ইয়াগফিরুয যুনূবা ইল্লা- আন্তা, ফাগফিরলী মাগফিরাতাম মিন 'ইনদিকা ওয়ারহামনী ইন্নাকা আন্তাল গাফূরুর রাহীম।</div>
+        <p class="timing-note">দরুদের পর, উভয় পাশে সালাম দেওয়ার আগে পড়তে হয়।</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RAKAT SECTION -->
+  <div class="section" id="rakats">
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#c8973a"></div> সুন্নাতে মুআক্কাদা</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#1a4731"></div> ফরজ</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#2d6a4f"></div> নফল / বিতর / গায়ের মুআক্কাদা</div>
+    </div>
+    <div class="gold-bar"></div>
+
+    <div class="rakat-grid">
+
+      <div class="rakat-card">
+        <div class="rakat-head"><span class="icon">🌅</span><h4>ফজর</h4></div>
+        <div class="rakat-body">
+          <div class="rakat-row"><span class="label">সুন্নত</span><span class="badge badge-w">২</span></div>
+          <div class="rakat-row"><span class="label">ফরজ</span><span class="badge badge-f">২</span></div>
+          <div class="total-tag">মোট ৪ রাকাত</div>
+        </div>
+      </div>
+
+      <div class="rakat-card">
+        <div class="rakat-head"><span class="icon">☀️</span><h4>যোহর</h4></div>
+        <div class="rakat-body">
+          <div class="rakat-row"><span class="label">সুন্নত</span><span class="badge badge-w">৪</span></div>
+          <div class="rakat-row"><span class="label">ফরজ</span><span class="badge badge-f">৪</span></div>
+          <div class="rakat-row"><span class="label">সুন্নত</span><span class="badge badge-w">২</span></div>
+          <div class="rakat-row"><span class="label">নফল</span><span class="badge badge-s">২</span></div>
+          <div class="total-tag">মোট ১২ রাকাত</div>
+        </div>
+      </div>
+
+      <div class="rakat-card">
+        <div class="rakat-head"><span class="icon">🌤️</span><h4>আসর</h4></div>
+        <div class="rakat-body">
+          <div class="rakat-row"><span class="label">সুন্নত</span><span class="badge badge-s">৪</span></div>
+          <div class="rakat-row"><span class="label">ফরজ</span><span class="badge badge-f">৪</span></div>
+          <div class="total-tag">মোট ৮ রাকাত</div>
+        </div>
+      </div>
+
+      <div class="rakat-card">
+        <div class="rakat-head"><span class="icon">🌇</span><h4>মাগরিব</h4></div>
+        <div class="rakat-body">
+          <div class="rakat-row"><span class="label">ফরজ</span><span class="badge badge-f">৩</span></div>
+          <div class="rakat-row"><span class="label">সুন্নত</span><span class="badge badge-w">২</span></div>
+          <div class="rakat-row"><span class="label">নফল</span><span class="badge badge-s">২</span></div>
+          <div class="total-tag">মোট ৭ রাকাত</div>
+        </div>
+      </div>
+
+      <div class="rakat-card" style="grid-column:1/-1">
+        <div class="rakat-head"><span class="icon">🌙</span><h4>এশা</h4></div>
+        <div class="rakat-body" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+          <div><div class="rakat-row"><span class="label">সুন্নত</span><span class="badge badge-s">৪</span></div></div>
+          <div><div class="rakat-row"><span class="label">ফরজ</span><span class="badge badge-f">৪</span></div></div>
+          <div><div class="rakat-row"><span class="label">সুন্নত</span><span class="badge badge-w">২</span></div></div>
+          <div><div class="rakat-row"><span class="label">নফল</span><span class="badge badge-s">২</span></div></div>
+          <div><div class="rakat-row"><span class="label">বিতর</span><span class="badge badge-f">৩</span></div></div>
+          <div><div class="rakat-row"><span class="label">নফল</span><span class="badge badge-s">২</span></div></div>
+          <div class="total-tag" style="grid-column:1/-1">মোট ১৭ রাকাত</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="note-box">
+      <p><strong>বিঃদ্রঃ —</strong> আসর ও এশার ৪ রাকাত সুন্নত <em>সুন্নাতে গায়ের মুআক্কাদা</em> (পড়লে সওয়াব, না পড়লে গুনাহ নেই)। ফজর, যোহর ও মাগরিবের সুন্নত <em>সুন্নাতে মুআক্কাদা</em> (বিনা কারণে ছাড়লে অপছন্দনীয়)।</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>আল্লাহ আমাদের সকলের নামাজ কবুল করুন। আমীন।</p>
+  </div>
+
+</div>
+
+<script>
+  function switchTab(id){
+    document.querySelectorAll('.tab').forEach((t,i)=>{
+      t.classList.remove('active');
+      if((['duas','rakats'])[i]===id) t.classList.add('active');
+    });
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+  function toggle(head){
+    head.classList.toggle('open');
+    head.nextElementSibling.classList.toggle('show');
+  }
+</script>
+</body>
+</html>
